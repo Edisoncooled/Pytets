@@ -1,6 +1,7 @@
 from random import shuffle
 import sys
 import time
+import os     # Этот импорт нужен для функции чистки экрана 
 
 item_list = ['🍌', '🍎', '🥥'],['🍌', '🍎', '🥥'], ['🍌', '🍎', '🥥']
 def shuffle_list(mylist):
@@ -15,19 +16,23 @@ def game():
 #game start
     print('  Welcome to the "Edwin ruletka" ', item_list[0], item_list[1], item_list[2], sep='\n')
     start = input('      start? (y / n): ')
+    os.system("CLS") # Вот её первое применение - возможно ты найдёшь ей другое место
     
 #player settings
     cash = int(input('      your sallar: '))
     game_cash = cash * 0.1
+    os.system("CLS")
+    
     print('you have ()', int(game_cash), ') game points in your game balance!')
     print('Game point per rol:  5  |  10  |  25 | 50 | 100 ')
     point_rol = int(input())
     game_cash = game_cash - point_rol
+    os.system("CLS")
     
 #game_logica
     while rerol == 'y':
         for i in range(1, 20):
-            sys.stderr.write(f"{shuffle_list(item_list)/r")
+            sys.stderr.write(f"{shuffle_list(item_list)/r")  # На этом моменте у меня компитяция сломалась)) Пришлось закоментить этот кусок, очень много денег выиграл)))
             time.sleep(.20)
         if item_list[0] == item_list[1] == item_list[2]:
             game_cash = game_cash + (point_rol * 100)
