@@ -22,24 +22,55 @@ def game():
         shuffle(rb)
         return rb[num_list]
     
-    def red_black(some):
+    def red_black_dif(num):
         dic = {'r' : '📕', 'b': '📓'}
-        if game_cash <= 0:
-            break
+        if num <= 0:
+            return num
         else:
             yes_no = input('do you wanna duble your game points? (y / n): ')
-            while yes_no != 'y' or yes_no != 'n':
-                print('wrong answer')
-                yes_no = input('do you wanna duble your game points? (y / n): ')
             if yes_no == 'y':
-                yes = inpu('to duble your game points, choose red or black card (r / b): ')
-                while yes != 'r' or yes != 'b':
-                    print('wrong answer')
-                    yes = inpu('to duble your game points, choose red or black card (r / b): ')
-                shuffle_rb(cards)
-                if rb == dic[yes]:
-                    game_cash  = game_cash * 2
-            else:
+                yes = input('to duble your game points, choose red📕 or black card📓 (r / b): ')
+                if yes == 'r':
+                    if shuffle_rb(cards) == dic[yes]:
+                        num = num * 2
+                        printprint('OMG it"s incredible, you won:', num, 'game points!' )
+                        return num
+                    else:
+                        return num
+                if yes == 'b':
+                    if shuffle_rb(cards) == dic[yes]:
+                        num = num * 2
+                        print('OMG it"s incredible, you won:', num, 'game points!' )
+                        return num
+                    else:
+                        print('nothing, mb next time)')
+                        return num
+    def red_black_(num):
+        dic = {'r' : '📕', 'b': '📓'}
+        if num <= 0:
+            return num
+        else:
+            yes_no = input('do you wanna duble your game points? (y / n): ')
+            if yes_no == 'y':
+                yes = input('to duble your game points, choose red📕 or black card📓 (r / b): ')
+                if yes == 'r':
+                    if shuffle_rb(cards) == dic[yes]:
+                        num = num * 2
+                        print('lucky you, you won:', num, 'game points!' )
+                        return num
+                    else:
+                        return num
+                if yes == 'b':
+                    if shuffle_rb(cards) == dic[yes]:
+                        num = num * 2
+                        print('lucky you, you won:', num, 'game points!' )
+                        return num
+                    else:
+                        print('nothing, mb next time)')
+                        return num
+                        
+            if yes_no == 'n':
+                return num
                 
             
 
@@ -48,8 +79,12 @@ def game():
     print('  Welcome to the "Edwin ruletka" ', item_list[0], item_list[1], item_list[2], sep='\n')
     start = input('      start? (y / n): ')
     while start != 'y':
-        print('wrong answer')
-        start = input('      start? (y / n): ')
+        if start == 'n':
+            print('okay, goodbey!')
+            break
+        else:
+            print('wrong answer')
+            start = input('      start? (y / n): ')
     
 #Cash putting
     cash = input('      Put in money: ')
@@ -80,18 +115,15 @@ def game():
             sys.stderr.write(f"{shuffle_list(item_list)}\r")
             time.sleep(.20)
         if item_list[0] == item_list[1] == item_list[2]:
-            game_cash = game_cash + (point_rol * 100)
-            red_black(game_cash)
+            game_cash = game_cash + red_black_def((point_rol * 100))
         else: 
             if item_list[0][0] == item_list[1][0] == item_list[2][0]:
                 game_cash = game_cash + (point_rol * 5)
-                red_black(game_cash)
+                game_cash = game_cash + red_black((point_rol * 5))
             elif item_list[0][1] == item_list[1][1] == item_list[2][1]:
-                game_cash = game_cash + (point_rol * 5)
-                red_black(game_cash)
+                game_cash = game_cash + red_black((point_rol * 5))
             elif item_list[0][2] == item_list[1][2] == item_list[2][2]:
-                game_cash = game_cash + (point_rol * 5) 
-                red_black(game_cash)
+                game_cash = game_cash + red_black((point_rol * 5))
         if game_cash - int(point_rol) < 0:
             print('you are looser')
             break
@@ -99,8 +131,9 @@ def game():
         rerol = input('rerol? (y / n): ')
         if rerol == 'y':
             game_cash = game_cash - point_rol
-        elif rerol == 'n':
+        if rerol == 'n':
             break
+
     print('Your balance: ', game_cash)
     
     
