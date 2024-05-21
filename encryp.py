@@ -17,20 +17,35 @@ def cesar(dir, t, x):
 
     if dir == 'encode':
         for i in t:
-            if letters.index(i)+s > len(letters):
-                res+=letters[letters.index(i)+s - len(letters)]
+            if i in letters:
+                if letters.index(i)+s > len(letters):
+                    res+=letters[letters.index(i)+s - len(letters)]
+                else:
+                    res+=letters[letters.index(i)+s]
             else:
-                res+=letters[letters.index(i)+s]
-        return(res)
+                res+=i
+        print(res)
+        return rerun()
     else:
         for i in t:
-            if letters.index(i) < s:
-                res+=letters[len(letters) - (s - letters.index(i))]
+            if i in letters:
+                if letters.index(i) < s:
+                    res+=letters[len(letters) - (s - letters.index(i))]
+                else:
+                    res+=letters[letters.index(i)-s]
             else:
-                res+=letters[letters.index(i)-s]
-        return(res)
-       
-    
-        
-print(cesar(direction, text, int(shift)))
+                res+=i
+        print(res)
+        return rerun()
 
+def rerun():
+    user = input('write y if u need one more time: ')
+    if user == 'y':
+        direction=input('write encode if u want encode message, write decode to decode message: ')
+        text = input('write you message: ')
+        shift = input('write encode value: ')
+        cesar(direction, text, int(shift))
+    elif user == 'n':
+        print('Bye')
+
+cesar(direction, text, int(shift)) 
